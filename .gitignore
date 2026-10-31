@@ -1,0 +1,19 @@
+# 忽略 Excel 原始試算表（個資與原始名冊安全保護）
+*.xlsx
+*.xls
+*.xlsm
+*.xlsb
+*.csv
+~$*
+*.zip
+
+# Python 快取與暫存檔
+__pycache__/
+*.py[cod]
+*$py.class
+*.tmp
+
+# 系統與編輯器暫存
+.system_generated/
+.DS_Store
+Thumbs.db

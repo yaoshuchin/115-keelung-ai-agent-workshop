@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1151031 基隆百福科技團線上研習2 - 資料圖表呈現</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap');
+    body {
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+    }
+    .quote-card {
+      background: #ffffff;
+      border-left: 4px solid #2563eb;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-radius: 0.75rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- Header Banner -->
+  <header class="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/70 text-blue-200 text-xs font-semibold mb-3 border border-blue-700">
+            <i class="fa-solid fa-chart-pie"></i> 成果統計儀表板（個資已遮罩）
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            1151031 基隆百福科技團線上研習2
+          </h1>
+          <p class="text-blue-200 text-sm sm:text-base mt-2 flex flex-wrap items-center gap-y-1 gap-x-4">
+            <span><i class="fa-solid fa-microchip mr-1"></i> AI Agent 行政進階實戰：從持久化工作流到可信任智慧代理</span>
+            <span><i class="fa-regular fa-calendar-days mr-1"></i> 2026/10/31</span>
+            <span><i class="fa-solid fa-user-shield mr-1"></i> 去識別化保護：姓名第2/3字用 OO，身分證僅留前3碼</span>
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="window.print()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-medium border border-white/20 transition flex items-center gap-2">
+            <i class="fa-solid fa-print"></i> 列印報告
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6">
+
+    <!-- KPI Metric Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      
+      <div class="stat-card p-5">
+        <div class="flex items-center justify-between text-slate-500 mb-2">
+          <span class="text-xs font-semibold tracking-wider uppercase">總填報人次</span>
+          <span class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-sm"><i class="fa-solid fa-users"></i></span>
+        </div>
+        <div class="text-3xl font-extrabold text-slate-800">56 <span class="text-sm font-normal text-slate-500">人次</span></div>
+        <p class="text-xs text-slate-500 mt-2">涵蓋 48 所學校與單位</p>
+      </div>
+
+      <div class="stat-card p-5">
+        <div class="flex items-center justify-between text-slate-500 mb-2">
+          <span class="text-xs font-semibold tracking-wider uppercase">研習時數 (格式正確)</span>
+          <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm"><i class="fa-solid fa-id-card"></i></span>
+        </div>
+        <div class="text-3xl font-extrabold text-emerald-600">39 <span class="text-sm font-normal text-slate-500">人 (69.6%)</span></div>
+        <p class="text-xs text-emerald-700 mt-2"><i class="fa-solid fa-check mr-1"></i>身分證格式正確 (10碼)</p>
+      </div>
+
+      <div class="stat-card p-5">
+        <div class="flex items-center justify-between text-slate-500 mb-2">
+          <span class="text-xs font-semibold tracking-wider uppercase">回饋合格 (>100字)</span>
+          <span class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm"><i class="fa-solid fa-file-circle-check"></i></span>
+        </div>
+        <div class="text-3xl font-extrabold text-indigo-600">45 <span class="text-sm font-normal text-slate-500">人 (80.4%)</span></div>
+        <p class="text-xs text-indigo-700 mt-2"><i class="fa-solid fa-pen-nib mr-1"></i>心得內容詳細充實</p>
+      </div>
+
+      <div class="stat-card p-5">
+        <div class="flex items-center justify-between text-slate-500 mb-2">
+          <span class="text-xs font-semibold tracking-wider uppercase">全國服務縣市</span>
+          <span class="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-sm"><i class="fa-solid fa-map-location-dot"></i></span>
+        </div>
+        <div class="text-3xl font-extrabold text-purple-600">16 <span class="text-sm font-normal text-slate-500">個縣市</span></div>
+        <p class="text-xs text-purple-700 mt-2">北中南東全台跨區參與</p>
+      </div>
+
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+      
+      <!-- Chart 1: 縣市分布 (7 cols) -->
+      <div class="lg:col-span-7 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-chart-column text-blue-600 mr-2"></i>參與學員所屬服務縣市分布</h3>
+            <p class="text-xs text-slate-500">新北(8)、台中(7)、台北(6)、高雄(6)、桃園(5)、台南(5)等</p>
+          </div>
+        </div>
+        <div class="relative h-72">
+          <canvas id="regionChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 2: 教育階段 (5 cols) -->
+      <div class="lg:col-span-5 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-chart-pie text-emerald-600 mr-2"></i>教育階段與學程分布</h3>
+            <p class="text-xs text-slate-500">國小(35.7%)與高中職(30.4%)佔六成五以上</p>
+          </div>
+        </div>
+        <div class="relative h-72 flex items-center justify-center">
+          <canvas id="levelChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 3: 時數需求比例 (6 cols) -->
+      <div class="lg:col-span-6 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-id-badge text-emerald-600 mr-2"></i>研習時數核發需求 (身分證正確格式)</h3>
+            <p class="text-xs text-slate-500">標準10碼身分證佔比：39 人 (69.6%)</p>
+          </div>
+        </div>
+        <div class="relative h-64 flex items-center justify-center">
+          <canvas id="idRatioChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Chart 4: 心得字數合格比例 (6 cols) -->
+      <div class="lg:col-span-6 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+          <div>
+            <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-file-lines text-indigo-600 mr-2"></i>心得文字合格檢核 (>100字)</h3>
+            <p class="text-xs text-slate-500">達標合格共 45 人 (80.4%)，深度反饋率極高</p>
+          </div>
+        </div>
+        <div class="relative h-64 flex items-center justify-center">
+          <canvas id="fbPassChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Highlights Testimonials (去識別化) -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-800"><i class="fa-solid fa-quote-left text-blue-600 mr-2"></i>精選合格學員質性心得迴響</h2>
+          <p class="text-xs text-slate-500">學員姓名第二第三字已依規定以「OO」遮罩，身分證字號只留前3碼保護個資</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <div class="quote-card p-5">
+          <div class="flex items-center justify-between mb-3 text-xs text-slate-500">
+            <span class="font-bold text-blue-700"><i class="fa-solid fa-school mr-1"></i> 台中市廍子國小</span>
+            <span class="font-semibold text-slate-800">楊OO (D22*******)</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            「平常整天被瑣事打斷，剛剛算到一半的簽到表和經費又要重來。以前用 ChatGPT 常常自己亂掰，這堂課最大的收穫是把思維翻轉過來：規格先講清楚、善用工具精算對照、進度存成檔案可一秒接關，最後設好安全防線，真正替自己分擔重複雜務，把力氣留給教學與學生！」
+          </p>
+        </div>
+
+        <div class="quote-card p-5 border-l-emerald-600">
+          <div class="flex items-center justify-between mb-3 text-xs text-slate-500">
+            <span class="font-bold text-emerald-700"><i class="fa-solid fa-school mr-1"></i> 基隆市百福國中</span>
+            <span class="font-semibold text-slate-800">宋OO (L12*******)</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            「學校行政工作以服務教學為目的，但繁雜事務讓教師對兼任行政避而遠之。若能有一套便捷順暢的系統架構，可以大幅減輕負擔，讓兼任行政教師喘一口氣，更有餘裕將心力用於教學準備！感謝講師傾囊相授！」
+          </p>
+        </div>
+
+        <div class="quote-card p-5 border-l-purple-600">
+          <div class="flex items-center justify-between mb-3 text-xs text-slate-500">
+            <span class="font-bold text-purple-700"><i class="fa-solid fa-school mr-1"></i> 台北市麗山高中</span>
+            <span class="font-semibold text-slate-800">VOOny Huang (F24*******)</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            「這門課程精準切入校園行政痛點，彭主任將深奧的 AI Agent 架構實用化。透過持久化記憶（如 PROJECT_STATE.md）設計，完美解決 AI 跨階段斷點問題；最令人安心的是導入人工審核與安全護欄機制，兼具高效率與高信任度！」
+          </p>
+        </div>
+
+        <div class="quote-card p-5 border-l-amber-600">
+          <div class="flex items-center justify-between mb-3 text-xs text-slate-500">
+            <span class="font-bold text-amber-700"><i class="fa-solid fa-school mr-1"></i> 嘉義市輔仁中學</span>
+            <span class="font-semibold text-slate-800">陳OO (Q12*******)</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            「以前教務、總務開會資料與研習數據整理超花時間，只能一筆一筆手動改。這次課程直接帶大家把日常行政改成『半自動流程』，連去個資、寫報告都有現成網頁工具可用，省下一大半時間！」
+          </p>
+        </div>
+
+        <div class="quote-card p-5 border-l-cyan-600">
+          <div class="flex items-center justify-between mb-3 text-xs text-slate-500">
+            <span class="font-bold text-cyan-700"><i class="fa-solid fa-school mr-1"></i> 新北市泰山高中</span>
+            <span class="font-semibold text-slate-800">吳OO (E22*******)</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            「面對越來越多的教學實務挑戰，感謝講師分享心法和許多實際做法，頗有共鳴。尤其是資訊焦慮的這部分感覺被觸動到了，提醒自己：善用 AI 而非被制約了心智囉！」
+          </p>
+        </div>
+
+        <div class="quote-card p-5 border-l-rose-600">
+          <div class="flex items-center justify-between mb-3 text-xs text-slate-500">
+            <span class="font-bold text-rose-700"><i class="fa-solid fa-school mr-1"></i> 桃園市立會稽國中</span>
+            <span class="font-semibold text-slate-800">洪OO (E22*******)</span>
+          </div>
+          <p class="text-xs text-slate-700 leading-relaxed italic">
+            「非常感謝講師精彩且生動的解說！從觀念引導到實際操作都非常順暢，讓我對 AI 工具在教學與工作上的應用有了全新的認識與靈感。講師教學步調拿捏得剛好，回答問題也十分細心！」
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Data Table & Search (個資遮罩版) -->
+    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+      <div class="p-5 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 class="font-bold text-slate-800 text-lg"><i class="fa-solid fa-table-list text-blue-600 mr-2"></i>研習名單與回饋字數檢核清冊</h2>
+          <p class="text-xs text-slate-500">姓名第2/3字遮罩為 OO，身分證保留前3碼其餘*號</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="搜尋姓名、學校或心得..." class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 w-52">
+          <select id="filterType" onchange="filterTable()" class="px-3 py-1.5 text-xs rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+            <option value="all">全部紀錄 (56)</option>
+            <option value="hours">符合時數格式 (39)</option>
+            <option value="pass">回饋合格 >100字 (45)</option>
+            <option value="both">時數+回饋皆合格 (30)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-slate-600">
+          <thead class="bg-slate-50 text-slate-700 font-semibold border-b border-slate-200">
+            <tr>
+              <th class="py-3 px-3 w-12 text-center">序號</th>
+              <th class="py-3 px-4 w-36">服務單位</th>
+              <th class="py-3 px-3 w-24">姓名(遮罩)</th>
+              <th class="py-3 px-3 w-28 text-center">身分證(前3碼)</th>
+              <th class="py-3 px-2 w-20 text-center">心得字數</th>
+              <th class="py-3 px-2 w-20 text-center">時數合格</th>
+              <th class="py-3 px-4">研習心得回饋摘要</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-slate-100">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+      <div class="p-4 border-t border-slate-100 text-xs text-slate-500 flex justify-between items-center bg-slate-50">
+        <span id="recordCountText">顯示全部 56 筆紀錄</span>
+        <span class="text-slate-400">已落實個人資料保護法去識別化標準規範</span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const records = [{"idx": 1, "time": "2026/10/31 上午 9:25:31", "school": "桃園市立會稽國中", "name": "洪OO", "id": "E22*******", "is_valid_id": true, "fb_len": 133, "is_pass": true, "feedback": "非常感謝講師精彩且生動的解說！這次的 AI 線上研習內容極具實用性，從觀念引導到實際操作都非常順暢，讓我對 AI 工具在教學與工作上的應用有了全新的認識與靈感。講師的教學步調拿捏得剛好，回答問題也十分細心。這場研習收穫豐富，未來非常期待能繼續參加講師的相關進階課程！", "region": "桃園市", "level": "國中"}, {"idx": 2, "time": "2026/10/31 上午 10:00:46", "school": "桃園市私立啟英高級中學", "name": "EOOard", "id": "A13*******", "is_valid_id": false, "fb_len": 173, "is_pass": true, "feedback": "講師對AI Agent很專業, 耐心講解內容清楚易明, 屏幕清晰 即使新手也易於吸收, 課程實用對工作有很大幫助,能提高行政處理效率. 講課速度恰當能夠跟上, 講義材料展示詳細清晰, 而且準備充足,另善用padlet線上公告板平台有條理整理学习资料及把各項目分類供讀者方便查找跟進, 不用在google meet來回翻找, 也供範例練習並給解答.", "region": "桃園市", "level": "機關/機構/其他"}, {"idx": 3, "time": "2026/10/31 上午 9:38:52", "school": "新北市泰山高中", "name": "吳OO", "id": "E22*******", "is_valid_id": true, "fb_len": 7, "is_pass": false, "feedback": "善用而非被制約", "region": "新北市", "level": "高中職"}, {"idx": 4, "time": "2026/10/31 上午 9:47:31", "school": "新北市泰山高中", "name": "吳OO", "id": "E22*******", "is_valid_id": true, "fb_len": 122, "is_pass": true, "feedback": "面對越來越多的教學實務挑戰，感謝講師分享心法和許多實際做法，頗有共鳴，也對於第一線實務工作者助益甚多。尤其是資訊焦慮的這部份，感覺被講者觸動到了，若非如此,，又怎會連同假日清早，還天天追著線上研習跑？！呵！提醒自己：善用AI而非被制約了心智囉！", "region": "新北市", "level": "高中職"}, {"idx": 5, "time": "2026/10/31 上午 9:49:20", "school": "台北市麗山高中", "name": "VOOny Huang", "id": "F24*******", "is_valid_id": true, "fb_len": 204, "is_pass": true, "feedback": "這門課程精準切入校園行政的痛點，講師彭智標老師將深奧的 AI Agent 架構實用化。透過持久化記憶（如 PROJECT_STATE.md）的設計，完美解決了 AI 跨工作階段的斷點問題；而「規劃、執行、審查」的自動化工作流，更能高效應對觀議課與行政計畫等繁雜校務。最令人安心的是課程導入了人工審核與安全護欄機制，確保 AI 代理在嚴謹的校園環境中兼具高效率與高信任度，是一場極具實戰價值的行政數位轉型饗宴！", "region": "台北市", "level": "高中職"}, {"idx": 6, "time": "2026/10/31 上午 10:03:31", "school": "新北市淡海國小", "name": "詹OO", "id": "B12*******", "is_valid_id": true, "fb_len": 145, "is_pass": true, "feedback": "由衷感謝講師今日精彩絕倫且細膩入微的引導，讓繁雜的操作變得清晰易懂，受益匪淺。這場研習不僅展現了高度的專業與熱忱，更體現了教育界共好、共榮的無私精神。感謝主辦單位卓越的策劃能力，讓我們能在如此優質的議題中，共同成就一場極致美好的學習體驗。我迫不及待想將今天所學，運用到我的生活及教學工作中。", "region": "新北市", "level": "國小"}, {"idx": 7, "time": "2026/10/31 上午 10:03:39", "school": "雲林縣公誠國小", "name": "黃OO", "id": "D12*******", "is_valid_id": true, "fb_len": 7, "is_pass": false, "feedback": "感謝老師的分享", "region": "雲林縣", "level": "國小"}, {"idx": 8, "time": "2026/10/31 上午 10:04:45", "school": "台北市麗山高中", "name": "VOOnyHuang", "id": "A24*******", "is_valid_id": true, "fb_len": 204, "is_pass": true, "feedback": "這門課程精準切入校園行政的痛點，講師彭智標老師將深奧的 AI Agent 架構實用化。透過持久化記憶（如 PROJECT_STATE.md）的設計，完美解決了 AI 跨工作階段的斷點問題；而「規劃、執行、審查」的自動化工作流，更能高效應對觀議課與行政計畫等繁雜校務。最令人安心的是課程導入了人工審核與安全護欄機制，確保 AI 代理在嚴謹的校園環境中兼具高效率與高信任度，是一場極具實戰價值的行政數位轉型饗宴！", "region": "台北市", "level": "高中職"}, {"idx": 9, "time": "2026/10/31 上午 10:14:29", "school": "雲林縣公誠國小", "name": "黃OO", "id": "D12*******", "is_valid_id": true, "fb_len": 135, "is_pass": true, "feedback": "感謝這段探索旅程，讓我了解系統從「持久化工作流」蛻變為「可信任智慧代理」的可執行化。由衷感謝老師的悉心引領與啟發，讓我突破管理與效率化的工具創作瓶頸。在老師的指引下，我可以對行政工作上的需求，寫出更有效的解決方案、工具，並協助同事處理在業務上的困難，收穫滿滿且意義非凡！", "region": "雲林縣", "level": "國小"}, {"idx": 10, "time": "2026/10/31 上午 10:23:41", "school": "高雄市文府國小", "name": "陳OO", "id": "E12*******", "is_valid_id": true, "fb_len": 188, "is_pass": true, "feedback": "這次參加「AI Agent 行政進階實戰：從持久化工作流到可信任的智慧代理」課程，讓我對人工智慧在行政工作上的應用有更深入的認識。課程內容不僅介紹 AI Agent 的核心概念，更透過實際案例與操作演練，讓我了解如何建構持久化工作流，提升行政作業的效率與品質。課程中講師深入淺出地說明智慧代理的設計思維，以及如何透過自動化流程整合資料蒐集、分析與執行任務，大幅減少重複性工作。", "region": "高雄市", "level": "國小"}, {"idx": 11, "time": "2026/10/31 上午 10:24:43", "school": "高雄市苓雅區中正國小", "name": "蔡OO", "id": "E12*******", "is_valid_id": true, "fb_len": 153, "is_pass": true, "feedback": "1.便利的AGY CLI 與 AGYReady 安裝小幫手，讓我直接進入Gemni文字介面，不用使用阿亮老師之前教導的小龍蝦或ChatGPT中開啟。 2.教材內容詳盡也有提示語、範例練習檔，方便學習者能快速跟上進度。 3. 感謝內容都能符合學校行政面對的問題，雖然我今年重回班級，還是享受自動化的建置過程。", "region": "高雄市", "level": "國小"}, {"idx": 12, "time": "2026/10/31 上午 11:26:39", "school": "嘉義市輔仁中學", "name": "陳OO", "id": "Q12*******", "is_valid_id": true, "fb_len": 133, "is_pass": true, "feedback": "這場研習真的很實用！\n以前教務、總務那些開會資料跟研習數據整理起來超花時間，只能一筆一筆手動改。這次課程直接帶大家把日常行政改成「半自動流程」，連去個資、寫報告都有現成網頁工具可以用。\n照著演練一遍，以後處理公文跟雜事能省下一大半時間，對第一線行政同仁來說很有幫助。", "region": "嘉義市", "level": "機關/機構/其他"}, {"idx": 13, "time": "2026/10/31 上午 11:28:06", "school": "基隆市建德國中", "name": "朱OO", "id": "C12*******", "is_valid_id": true, "fb_len": 235, "is_pass": true, "feedback": "之前付費claude code 然後整合vs code玩程式, 但後來沒有付費了，我的程式專案也年老失修，出現了一堆bug，老師介紹的agy cli 也可以整合vs code 並且有免費的額度可以使用，這對我來說是一個很好的工具, 趁剛剛把壞掉的程式修復好了，老師然後也介紹了open code 這個東西但我之前也沒使用過，所以想再研究一下，他可以在多工作階段，在同一專案中平行啟動多個代理，我覺得這是蠻不錯的東西，可惜沒上到第一堂的課，有機會的話再來聽老師其他的課程。", "region": "基隆市", "level": "國中"}, {"idx": 14, "time": "2026/10/31 上午 11:29:59", "school": "台南市永仁高中", "name": "蔡OO", "id": "D22*******", "is_valid_id": true, "fb_len": 165, "is_pass": true, "feedback": "謝謝南投國中讓我參與彭智標老師主講的「AI Agent 行政進階實戰」研習收穫豐富。課程從建構持久化工作環境、設計校園行政工作流，到建立可信任的 AI 代理治理機制，循序漸進地引領我們將自動化工具落實於實務中。透過本次學習，深刻體會到 AI Agent 不僅能提升行政效能，更能藉由安全護欄與架構優化，為校園數位轉型奠定穩固基礎。", "region": "台南市", "level": "高中職"}, {"idx": 15, "time": "2026/10/31 上午 11:32:32", "school": "台南市永仁高中", "name": "蘇OO", "id": "A22*******", "is_valid_id": true, "fb_len": 70, "is_pass": false, "feedback": "感恩南投國中 AI Agent 行政實戰研習，讓我深刻體會到智慧代理與持久化工作流的強大應用潛力，能有效提升校園行政效能並奠定數位轉型基石。", "region": "台南市", "level": "高中職"}, {"idx": 16, "time": "2026/10/31 上午 11:48:44", "school": "基隆市中正國中", "name": "鄒OO", "id": "C22*******", "is_valid_id": true, "fb_len": 13, "is_pass": false, "feedback": "實際又長久的教學,謝謝老師", "region": "基隆市", "level": "國中"}, {"idx": 17, "time": "2026/10/31 上午 11:49:09", "school": "雲林縣崇德國中", "name": "張OO", "id": "R12*******", "is_valid_id": true, "fb_len": 82, "is_pass": false, "feedback": "之前就聽過主任的研習，還是一樣的精實，從提示詞到工作流到AGENT的概念，讓我有不一樣的概念想法，然後AGENT可以不用一直按同意的教學，是我的痛點，感謝老師分享!", "region": "雲林縣", "level": "國中"}, {"idx": 18, "time": "2026/10/31 上午 11:50:47", "school": "高雄市楠梓國中", "name": "蔡OO", "id": "D12*******", "is_valid_id": true, "fb_len": 223, "is_pass": true, "feedback": "參加彭老師研習每次都覺得很實用很貼地氣，觀議課進度情況簡直是直戳教學組的點，這是其他研習沒有的特點，所以每次都很期待在研習中聽到實用的範例。像最後面的資料安全工具，可以輕易去除、遮蓋學生的個資也是超實用的，感覺老師交的就是一整套完整的工具與課程，這是最佩服彭老師的地方，感謝彭老師與主辦單位。期待收到下一場研習的通知，超讚的。看下次可以學用摸ai gent直接操作處理簡單公文的研習，若能開成一定要通知我。tthmay@gmail.com，謝謝。", "region": "高雄市", "level": "國中"}, {"idx": 19, "time": "2026/10/31 上午 11:51:21", "school": "基隆市立暖暖高中", "name": "黃OO", "id": "不需", "is_valid_id": false, "fb_len": 163, "is_pass": true, "feedback": "對AI agent的代理一直沒有很有系統的了解，經過彭主任的講解，對這個部份就更加了解了。而且主任對於行政工作流，包含同意書統計、公開授課相關、資料數據結算、研習回饋、研習成果結報等方面的例子給我們看時，而且清楚地教給我們觀念，能夠利用到其他相關的行政工作，非常有用，收穫很多。希望下次還有相關的研習可以參與，也謝謝主辦單位。", "region": "基隆市", "level": "高中職"}, {"idx": 20, "time": "2026/10/31 上午 11:51:35", "school": "臺中市瑞穗國小", "name": "徐OO", "id": "L22*******", "is_valid_id": true, "fb_len": 181, "is_pass": true, "feedback": "無法全部熟悉，需看回放，但透過這次課程，我了解到 AI Agent 不僅能提升工作效率，更能實際應用於校園行政事務。從建構穩定的工作環境、設計自動化工作流程，到建立可信任的治理與驗證機制，讓我對 AI 技術有更深入的認識。未來希望能將所學運用於日常行政工作，減少重複性作業，提升行政效率與服務品質，同時兼顧資訊安全與資料正確性，讓 AI 成為校園行政的得力助手。", "region": "台中市", "level": "國小"}, {"idx": 21, "time": "2026/10/31 上午 11:51:45", "school": "台中市豐原高中", "name": "蔡OO", "id": "3D5*******", "is_valid_id": false, "fb_len": 173, "is_pass": true, "feedback": "非常感謝彭主任帶來如此精彩的分享！ 從 Antigravity 的基本概念、詳細的操作步驟，並且整理製作完整清晰的提示詞及安裝工具及講義說明，降低大家入門的門檻。非常感謝彭主任透過校園實際應用案例，實際展現了如何運用 AI Agent 建構工作流。此外，更將行政工作流的概念融入其中，幫助我們大幅提升處理繁瑣事務的效率。經過本場研習真的收穫滿滿！", "region": "台中市", "level": "高中職"}, {"idx": 22, "time": "2026/10/31 上午 11:56:57", "school": "台中市 無", "name": "吳OO", "id": "L12*******", "is_valid_id": true, "fb_len": 103, "is_pass": true, "feedback": "在這場研習課程後，學到更多AI教育，未來更想與更多老師學習AI及數位科技，在學校內講課時可以用AI與學員增加更多互動，與解決不同的題目，有效完成多項研究，讓AI給學員打造研究室，這場研習課程讓我有更多的了解", "region": "台中市", "level": "機關/機構/其他"}, {"idx": 23, "time": "2026/10/31 上午 11:53:10", "school": "高雄+無", "name": "pOOpei", "id": "無", "is_valid_id": false, "fb_len": 137, "is_pass": true, "feedback": "老師講課非常充實，以前使用AI大多是協助撰寫文章或整理資料，沒想到 AI 能協助規劃工作流程、追蹤進度及完成任務，雖然有些操作有難，需要多練習，這次課程也讓我體會到AI 不只是工具，更是提升工作效率的好幫手。希望未來能將所學實際應用，減輕工作負擔，讓行政工作更加輕鬆有效率。", "region": "高雄市", "level": "機關/機構/其他"}, {"idx": 24, "time": "2026/10/31 上午 11:53:56", "school": "臺北市立士林國中", "name": "顏OO", "id": "M22*******", "is_valid_id": true, "fb_len": 137, "is_pass": true, "feedback": "今天的研習內容非常豐富，課程裡提到很多剛剛好是身兼行政組長與領域召集人需要的痛點解方。一直擔心不會將學到的ai應用在工作上，像以前Gem,存了一大堆，卻很少好用的，總是少了一些需要的功能，像公文產生器，生成了修改的時間不如手寫，因為不太會改，今天對這些有些改觀了，感謝老師。", "region": "台北市", "level": "國中"}, {"idx": 25, "time": "2026/10/31 上午 11:53:56", "school": "桃園市政府", "name": "林OO", "id": "Q22******", "is_valid_id": false, "fb_len": 114, "is_pass": true, "feedback": "參加 AI Agent 課程後，我了解代理人能依據目標規劃步驟、運用工具並完成任務。課程讓我看見，AI 不只回答問題，也能協助整理資料、提升效率。未來我將嘗試運用於日常業務，並留意資料正確性與個資安全，讓科技成為可靠的工作夥伴。", "region": "桃園市", "level": "機關/機構/其他"}, {"idx": 26, "time": "2026/10/31 上午 11:56:06", "school": "臺中市大甲國小", "name": "李OO", "id": "L12*******", "is_valid_id": true, "fb_len": 149, "is_pass": true, "feedback": "AI工具能協助學校教學與行政運作的效率提升與教學準備，讓學校的人員能多留時間與精力於人際與教學準備，讓學校的運作達到事半功倍的效果，當然越多老師的投入越能達成這樣的可能。\n今日有幸參與線上研習課程，獲得更多的AI協作技巧與方法，對於自我能力的提升大有幫助，感謝講師精湛的講解與主辦單位開放線上參與。", "region": "台中市", "level": "國小"}, {"idx": 27, "time": "2026/10/31 上午 11:56:06", "school": "台北市+華岡興業基金會", "name": "林OO", "id": "F23*******", "is_valid_id": true, "fb_len": 249, "is_pass": true, "feedback": "老師釐清了很多的觀念，包含工作流、資訊流、責任流，非常受用，不只是使用在 AI Agent 的規劃使用上，在生活、工作也非常受用。特別是課程中釐清了 Prompt、Automation、Workflow 與 Agent 的差異，讓我們知道如何從「問 AI」走向「交付任務」。透過將工作拆成 Agent 能理解的規格，利用 Agent Brief 的基本結構定義任務，並給予資料、工具與工作環境，讓 AI 不只是生成內容，而是能真正讀資料、選工具、實際執行，對後續在行政場域規劃與應用帶來很大的幫助。", "region": "台北市", "level": "機關/機構/其他"}, {"idx": 28, "time": "2026/10/31 上午 11:56:23", "school": "屏東+無", "name": "pOOlu", "id": "不用研***", "is_valid_id": false, "fb_len": 153, "is_pass": true, "feedback": "老師講解課程，才發現行政工作不只是把事情做完，更重要的是讓任務分工清楚、資訊完整傳遞，以及每個環節都有明確的責任，善用 AI 不僅能節省時間，更能讓工作進度透明、方便追蹤與交接，希望未來能逐步運用所學，改善自己的工作習慣，讓行政業務更加有條理，也減少忙碌中容易發生的疏漏，謝謝老師分享及主辦單位，收獲滿滿。", "region": "屏東縣", "level": "機關/機構/其他"}, {"idx": 29, "time": "2026/10/31 上午 11:56:25", "school": "台中+興大附中", "name": "謝OO", "id": "K12*******", "is_valid_id": true, "fb_len": 390, "is_pass": true, "feedback": "本次參加「AI Agent 行政進階實戰：從持久化工作流到可信任的智慧代理」課程，讓我對 AI Agent 在校園行政工作上的應用有更深入的認識。課程中，彭智標老師從建構可持續運作的 Agent 工作環境開始，介紹如何讓 AI 不只是單次回應問題，而是能透過工作流持續執行與管理任務，大幅提升行政效率。\n\n在實作部分，老師分享校園行政 Agent 的設計流程，包含資料整理、自動化處理、訊息傳遞及決策輔助等應用案例，讓我了解 AI Agent 如何協助減少重複性工作，並將行政人員從繁瑣作業中解放出來。此外，課程也強調 AI 治理與驗證機制的重要性，透過權限管理、資料來源確認及結果驗證，確保 AI 產出的內容具備可信度與安全性。\n\n整體而言，本次課程內容兼具理論與實務，不僅提升我對 AI Agent 技術的理解，也讓我思考未來如何將相關工具導入工作流程，以提升效率與工作品質。", "region": "台中市", "level": "高中職"}, {"idx": 30, "time": "2026/10/31 上午 11:56:29", "school": "桃園市長庚科技大學", "name": "戴OO", "id": "F22*******", "is_valid_id": true, "fb_len": 420, "is_pass": true, "feedback": "參加這次研習，讓我重新思考自己過去使用生成式 AI 的方式。以往大多是透過與 AI 對話，協助整理資料、撰寫文件或規劃教學活動，雖然提高了工作效率，但每次執行新任務時，經常需要重新說明背景與需求，有時也會因為對話內容過多，而難以延續先前的工作。\n\n這次課程讓我印象較深刻的是 AI Agent 的持久化工作流程，以及透過 AGENTS.md、PROJECT_STATE.md、TASKS.md 等檔案管理專案狀態與任務進度。原來 AI 不只是被動回應問題，也能透過適當的架構設計，協助處理具有連續性與複雜性的工作。\n\n對我而言，這些概念需要一些時間熟悉，但也讓我看到未來應用於教學與研究的可能性。尤其平時需要兼顧課程設計、行政事務及研究計畫，若能逐步建立適合自己的 AI 協作流程，應該可以減少重複整理與溝通的時間。當然，AI 產出的內容仍需要由自己判斷與確認。未來希望能從實際工作中選擇一項任務開始嘗試，而不只是停留在了解工具功能的階段。", "region": "桃園市", "level": "大專院校"}, {"idx": 31, "time": "2026/10/31 上午 11:56:59", "school": "新北市鷺江國小", "name": "吳OO", "id": "F12*******", "is_valid_id": true, "fb_len": 161, "is_pass": true, "feedback": "透過今天的研習了解了AI Agent的運作原理、持久化工作流及智慧代理的應用，體會到AI不僅能協助處理日常的行政事務，更能提升工作效率與品質。尤其透過彭老師的實務案例，讓我對AI工具的整合與應用有更具體的認識。期望之後能將今日所學運用於行政和教學工作上，善用AI科技簡化流程、減輕工作負擔，打造更有效率且智慧化的工作環境。", "region": "新北市", "level": "國小"}, {"idx": 32, "time": "2026/10/31 上午 11:57:04", "school": "桃園市陽明高中", "name": "莊OO", "id": "W10*******", "is_valid_id": true, "fb_len": 17, "is_pass": false, "feedback": "感謝主辦 講師。需要錄影複習 謝謝", "region": "桃園市", "level": "高中職"}, {"idx": 33, "time": "2026/10/31 上午 11:57:44", "school": "新竹市立建功高中", "name": "陳OO", "id": "N22*******", "is_valid_id": true, "fb_len": 40, "is_pass": false, "feedback": "謝謝老師精彩課程，今日收穫滿滿。聽到老師肺腑之言，這經驗所得的建言，我覺得很棒。", "region": "新竹縣市", "level": "高中職"}, {"idx": 34, "time": "2026/10/31 上午 11:58:40", "school": "新竹縣明新科技大學", "name": "江OO", "id": "不需", "is_valid_id": false, "fb_len": 78, "is_pass": false, "feedback": "感謝 彭老師精采的分享 特別針對 行政 教學 輔導 提出許多以AI來協助 增加處理效率 這些研習內容需要多次練習 內化 才能真正\"落地應用\" 期待下次研習!", "region": "新竹縣市", "level": "大專院校"}, {"idx": 35, "time": "2026/10/31 上午 11:58:43", "school": "臺南市西港區成功國小", "name": "謝OO", "id": "A22*******", "is_valid_id": true, "fb_len": 7, "is_pass": false, "feedback": "感謝老師的分享", "region": "台南市", "level": "國小"}, {"idx": 36, "time": "2026/10/31 上午 11:58:58", "school": "台中市東大附中", "name": "王OO", "id": ".", "is_valid_id": false, "fb_len": 257, "is_pass": true, "feedback": "這堂課徹底翻轉了我對 AI 輔助校園行政的認知，從零散的提示詞對話，躍升為系統化、可持續的工程架構。\n\n最震撼的收穫在於持久化狀態管理，透過結構化文件讓 Agent 具備跨階段記憶，不再因斷點而重來；而結合 Planner-Execute-Review 閉環，將觀議課與計畫審查等繁瑣行政轉化為精確管線，兼顧了效率與成果品質。更關鍵的是課堂點出安全護欄與人工審核（HITL）的底線思維，落實證據追溯與權限控管，真正解決了校園應用最在意的倫理與信任問題。這不只是一門技術課，更是校園行政邁向可信任數位轉型的實務藍圖！", "region": "台中市", "level": "高中職"}, {"idx": 37, "time": "2026/10/31 下午 12:01:02", "school": "台南市永華國小", "name": "吳OO", "id": "不用，**", "is_valid_id": false, "fb_len": 117, "is_pass": true, "feedback": "這堂課真的太實用了！我學會了。別再盲目試提示詞，把行政需求像交代任務一樣講清楚規格，AI 才會精準。讓 AI 記住進度，中途被打斷也能隨時接關，不用每次重來。懂得設好檢查點，成果敢放心用。謝謝老師，終於能把繁瑣行政安心交給 AI 了！", "region": "台南市", "level": "國小"}, {"idx": 38, "time": "2026/10/31 下午 12:01:21", "school": "高雄+文藻外語大學", "name": "蘇OO", "id": "無需研*******", "is_valid_id": false, "fb_len": 236, "is_pass": true, "feedback": "謝謝彭智標老師的精彩分享，收穫滿滿。今天三個主題包含建構可持續運作的 Agent 工作環境、設計與實作校園行政 Agent 工作流、與建立可信任的 AI Agent 治理與驗證機制，本次研習瞭解透過持久化記憶為 AI 裝上大腦，並導入流程，將繁雜的成果報告與公文審查，轉化為有條理、可追蹤的自動化工作流。本次研習讓我們瞭解如何發揮了 AI 的高速行政效率，又保留了人類師長把關的安全防線。這是一套兼具前瞻視野與實務落地性的精彩規劃，能真正解放教師的行政負擔，回歸教學本質。", "region": "高雄市", "level": "大專院校"}, {"idx": 39, "time": "2026/10/31 下午 12:02:40", "school": "高雄市博愛國小", "name": "陳OO", "id": "E12*******", "is_valid_id": true, "fb_len": 109, "is_pass": true, "feedback": "超級感謝老師用心耐心的引導，辛苦了!收穫無敵豐富!終於比較清楚怎麼使用AIAGENT來加速工作的效率和品質，但期待開發更新速度能夠緩慢下來，一直覺得腦算力快跟不上更新的速度!也感謝老師願意開放錄影回提供我們複習!謝謝!", "region": "高雄市", "level": "國小"}, {"idx": 40, "time": "2026/10/31 下午 12:08:03", "school": "苗栗縣海口國小", "name": "莊OO", "id": "N22*******", "is_valid_id": true, "fb_len": 26, "is_pass": false, "feedback": "老師教得很詳細，讓我收穫滿滿，希望收到回放影片，謝謝", "region": "苗栗縣", "level": "國小"}, {"idx": 41, "time": "2026/10/31 下午 12:09:47", "school": "新北市光興國小", "name": "何OO", "id": "不需時*", "is_valid_id": false, "fb_len": 208, "is_pass": true, "feedback": "透過彭智標老師「AI Agent行政實戰：從工作流到智慧代理」的精彩分享，讓我對AI應用有更深入的認識。AI不再只是單純的問答工具，而是能協助規劃、執行及檢核任務的智慧助手。課程透過實際行政案例，介紹任務拆解、提示詞設計、資料整理及自動化工作流程，兼顧實用性與資訊安全。尤其讓我印象深刻的是，透過標準化流程與持續驗證，能有效減少重複性工作，提升行政效率與品質。未來希望將所學運用於日常業務，讓AI成為真正的工作夥伴。", "region": "新北市", "level": "國小"}, {"idx": 42, "time": "2026/10/31 下午 12:12:11", "school": "彰化縣 泰和國小", "name": "林OO", "id": "N12*******", "is_valid_id": true, "fb_len": 228, "is_pass": true, "feedback": "透過本次研習，我對AI Agent的概念與實際應用有了更深入的認識。課程從Prompt、Workflow與Agent的差異談起，逐步介紹如何運用Agent Brief設定任務目標、執行步驟及完成標準，並透過工具串接與專案管理，建立可持續運作的智慧工作流程。其中，資料檢核、權限控管及人工審核機制讓我印象深刻，也體會到AI不只是回答問題的工具，更能成為協助處理行政工作的智慧助手。未來希望將所學運用於資料彙整、會議紀錄及成果報告製作，提升行政效率與工作品質。", "region": "彰化縣", "level": "國小"}, {"idx": 43, "time": "2026/10/31 下午 12:13:13", "school": "臺東縣金峰鄉嘉蘭國小", "name": "龐OO", "id": "K12*******", "is_valid_id": true, "fb_len": 120, "is_pass": true, "feedback": "真的超喜歡智標主任的研習，尤其是學習到他的獨特思考流程，今天對於工作流的運作從一開始的遇到問題!，到中間的過程，並透過與AI的對談，產出最後協作的成品，後續的驗證與修改，這才有人與AI協作的價值，謝謝智標主任的分享，也謝謝主辦單位提供研習。", "region": "台東縣", "level": "國小"}, {"idx": 44, "time": "2026/10/31 下午 12:30:56", "school": "宜蘭縣宜蘭大學", "name": "許OO", "id": "不需要", "is_valid_id": false, "fb_len": 258, "is_pass": true, "feedback": "沒聽到第一場，真的很卡。這是一場高密度的思維躍升與實戰震撼！非常佩服彭智標老師將AI Agent 實戰梳理得如此兼具系統深度與落地即戰力。內容之豐富龐大，令人驚艷於 AI 賦能行政的強大潛能，也深感三小時的時間實在太過緊湊充實。因為這次是第二場，十分希望能有機會回看第一場的錄影，並反覆細品、跟著講義範例動手實作練習，才能將老師這套強大的技術框架徹底融會貫通。由衷佩服老師深厚的技術底蘊與無私傾囊相授的熱情，這堂課不僅打開了全新的自動化視野，更讓人收穫滿載、滿懷敬意，含金量破表，感謝老師帶來如此實用價值的精彩分享！", "region": "宜蘭縣", "level": "大專院校"}, {"idx": 45, "time": "2026/10/31 下午 12:33:05", "school": "苗栗縣斗煥國小", "name": "張OO", "id": "R12*******", "is_valid_id": true, "fb_len": 180, "is_pass": true, "feedback": "這場「AI Agent 行政進階實戰」研習內容非常實用且切中要害。透過彭智標老師深入淺出的引導，讓我清楚掌握如何運用 AGENTS.md 與持久化工作階段建立可續接的 Agent Workspace，並透過 Planner 到 Review 的架構將校園行政流程模組化。這不僅能大幅提升工作效率，更為未來在教學與行政上導入自動化智慧代理奠定了穩固且安全的基礎。", "region": "苗栗縣", "level": "國小"}, {"idx": 46, "time": "2026/10/31 下午 12:34:52", "school": "台北市中正社大", "name": "曾OO", "id": "A22*******", "is_valid_id": true, "fb_len": 276, "is_pass": true, "feedback": "我目前只有講師身分 不需要學分 但很感恩也有機會看到連結分享來學習\n感謝講師今天精彩且實用的分享！透過實際操作與案例示範，讓我們對 AI 工具及 AI Agent 的應用有更深入的認識，也開拓了未來在教學、行政及公文處理等工作上的更多可能性。課程內容豐富，講解清楚，讓原本對 AI 感到陌生的學員也能逐步了解並嘗試運用。\n\n建議未來能安排更多實務操作課程，例如 AI Agent 自動化行政流程、公文撰寫與處理，以及校務行政應用等，並提供課程錄影、簡報及操作步驟，方便學員課後複習與持續練習。\n\n再次感謝講師用心準備與無私分享，期待未來有更多進階課程！", "region": "台北市", "level": "機關/機構/其他"}, {"idx": 47, "time": "2026/10/31 下午 12:37:07", "school": "台南市崇明國小", "name": "洪OO", "id": "d12*******", "is_valid_id": true, "fb_len": 151, "is_pass": true, "feedback": "有幸能參與此次研習，讓我能透過課程將學校行政任務規格化拆解為具備工具調用、狀態持久化與自檢驗證的 AI Agent 工作流，能實質釋放 80% 的行政負擔。不僅學會編寫 Agent Brief 規格書 與進行數據清洗，還掌握了專案持久化儀表板與個資去識別化防護欄的運用，大幅提升學校行政效率與資訊安全。", "region": "台南市", "level": "國小"}, {"idx": 48, "time": "2026/10/31 下午 12:44:29", "school": "台北市陽明", "name": "何OO", "id": "不用", "is_valid_id": false, "fb_len": 710, "is_pass": true, "feedback": "本次研習讓我對 AI Agent 的應用有更深入的認識。老師不僅將相關概念說明得相當清楚，也搭配實際案例，示範如何將日常行政工作拆解、整合，進一步串接成具有連續性及可執行性的工作流程，讓抽象的技術概念更容易理解，也更能連結實際工作需求。\n\n其讓我印象深刻的是透過 AGENTS.md、PROJECT_STATE.md 及 TASKS.md 等文件，建立具有持續記憶與專案狀態管理能力的 AI Agent 工作環境。如此一來，工作不必每次重新交代背景、重複輸入相同資料，而是能延續前一次的工作進度，減少重複性操作。\nAI 不只是協助撰寫文字或整理資料，更可以進一步將成果報告、行政計畫審查等例行業務，規劃成有步驟、有紀錄且能檢核成果的工作流。透過適當的流程設計，可以讓 AI 協助處理重複性較高的工作，讓行政人員將時間與心力投入更需要專業判斷及溝通協調的事項。\n\n也提醒我們，AI 自動化並非完全取代人工，而是必須建立資料來源追溯、權限控管、安全防護及人工審核等機制，才能兼顧工作效率與成果品質。\n\n讓我體會到，AI Agent 的真正價值不只是讓工作做得更快，而是透過流程化與系統化的設計，讓工作經驗得以累積、任務能夠持續銜接，並減少不必要的重複作業。未來若能將這些方法逐步應用於日常行政業務，將有助於提升工作效率，也讓行政工作朝向更智慧化及標準化的方向發展。\n\n更深刻感受到自己在 AI 技術及工作流設計方面還有許多需要學習的地方，目前用AGENT都亂用，但至少已經知道未來可以努力的方向。接下來還是要持續學習、實際操作，，而是真正成為提升工作效率的好幫手！（自己的 AI 技術能力還有很大的進步空間，繼續加油！XD）", "region": "台北市", "level": "高中職"}, {"idx": 49, "time": "2026/10/31 下午 12:45:24", "school": "新北市福和中學", "name": "陳O", "id": "不用時****", "is_valid_id": false, "fb_len": 243, "is_pass": true, "feedback": "透過本次研習，讓我對AI Agent在校園行政上的應用有更深入的認識。除了學習如何運用持久化記憶與工作流程管理，提升行政工作的效率與延續性，也了解到AI不只是協助完成單一任務，更能整合規劃、執行與審查等工作。過程中也體會到資料安全、權限管理及人工審核的重要性，不能只追求效率，更需要確保資訊正確與執行過程的可靠性。未來希望能將所學運用於學校總務行政，逐步建立適合校園實際需求的智慧工作流程，減輕繁瑣的行政負擔，讓工作更加順暢，也提升整體行政服務品質。\n\n感謝彭主任精彩分享 謝謝主辦單位", "region": "新北市", "level": "機關/機構/其他"}, {"idx": 50, "time": "2026/10/31 下午 12:47:17", "school": "新竹市關東國小", "name": "郭OO", "id": "E22*******", "is_valid_id": true, "fb_len": 181, "is_pass": true, "feedback": "處理公文，以及校網製作，一直是我業務上的死穴；今天看主任示範，真是行雲流水，既流暢又順手，原來AI的功效可以如此之大，雖說早知道AI可以代理事務性的繁雜工作，但還是不放心，也無法想像公文以及像官網維護這樣的雜務，也能如此交辦，真的很謝謝主任，看來，現在真的是\"與AI協作 是王道\"，想擁有更多自主時間已經不是困難的事；誠摯感謝主辦的用心規劃，以及主任的無私分享。", "region": "新竹縣市", "level": "國小"}, {"idx": 51, "time": "2026/10/31 下午 12:56:37", "school": "新北市明志國中", "name": "洪OO", "id": "無研習****", "is_valid_id": false, "fb_len": 122, "is_pass": true, "feedback": "感謝智標老師實用分享，透過 AI Agent 從跨階段的狀態記憶管理，到計畫審查與觀議課的自動化工作流，再透過安全護欄與人工審核把關。不僅切中行政實務痛點，更在效率升級的同時建立安全措施，達到行政減量目的，內容豐富，乾貨滿滿，獲益良多，超棒的👍", "region": "新北市", "level": "國中"}, {"idx": 52, "time": "2026/10/31 下午 1:14:49", "school": "新北市淡水商工", "name": "梁OO", "id": "NO", "is_valid_id": false, "fb_len": 2, "is_pass": false, "feedback": "很棒", "region": "新北市", "level": "高中職"}, {"idx": 53, "time": "2026/10/31 下午 1:17:49", "school": "宜蘭縣順安國小", "name": "劉OO", "id": "不需要****", "is_valid_id": false, "fb_len": 177, "is_pass": true, "feedback": "年初開始接觸與使用AI工具（以Gemini和ChatGPT為主），原本只會利用簡單的提示詞和對話，並應用於教學設計以及評量（當時覺得已經足夠了）。後來有用過Gem精靈一段時間，今天聽到原來用AI agent才是王道，不僅有效率且有品質！未來更可以幫助我更有效率的完成行政工作和例行待辦事項！感謝講師今天早上精彩且接地氣的研習分享，後學收穫良多，收益滿滿！", "region": "宜蘭縣", "level": "國小"}, {"idx": 54, "time": "2026/10/31 下午 2:10:39", "school": "花蓮縣立萬榮國中。", "name": "艾OO", "id": "U22*******", "is_valid_id": true, "fb_len": 149, "is_pass": true, "feedback": "這是第二次看彭老師的影片。之前第一次看了之後 下課立即實作。也做出了一些作品 例如班級管理之類的 這次上的內容。雖然對我來講有點困難 但如果有復習影片。可以看的話。我應該還可以做出更多有助於在自己教學及行政上的內容。 我非常喜歡上彭老師的課。講的非常仔細也很有耐心的講完所有內容。謝謝彭老師的用心。", "region": "花蓮縣", "level": "國中"}, {"idx": 55, "time": "2026/10/31 下午 4:19:00", "school": "基隆市百福國中", "name": "宋OO", "id": "L12*******", "is_valid_id": true, "fb_len": 196, "is_pass": true, "feedback": "學校行政工作以服務教學為目的，但近年來教師對兼任行政工作避而遠之，尤其是某些職位，例如教學組或生教組，除了需要處理人與人之間的問題外，各項繁雜的行政事務更是主要因素之一，所以若能有一套便捷、順暢的系統架構，可以大幅減輕行政負擔，讓兼任行政的教師可以喘一口氣，而且更有餘裕將心力用於教學準備上，這兩次研習，感謝講師傾囊相授，讓與會教師功力大增，也感謝講師的用心投入，才能產出如此豐富的講座內容！", "region": "基隆市", "level": "國中"}, {"idx": 56, "time": "2026/10/31 下午 10:20:40", "school": "台中市廍子國小", "name": "楊OO", "id": "D22*******", "is_valid_id": true, "fb_len": 411, "is_pass": true, "feedback": "平常整天被瑣事打斷，常常電話響、學生受傷跑進來，剛剛算到一半的簽到表和經費又要重來；更別提每次辦完研習，還得一張張挑照片、算問卷平均、核對誰簽到沒簽退。\n以前用 ChatGPT，常常問一句答一句，還會自己亂掰，最後還是得開 Excel 重對。這堂課最大的收穫是把思維翻轉過來：\n一、規格先講清楚。用標準的任務規格把各處室的規矩、底線一次定好（例如行政兼課要語氣委婉、加總人數不能錯），不用每次重新教\n二、善用工具精算與對照。讓 AI 跑程式去抓缺簽退、算滿意度，甚至直接辨識照片寫出像樣的圖說，省下大半手動複製貼上的眼力。\n三、進度存成檔案。把進度寫在專案檔裡，就算臨時被叫去處理突發狀況、關掉視窗，隔天重開輸入指令就能一秒接關，不再有重頭交代的無力感。\n最後也最重要的是設好安全防線。個資自動遮蔽、重要數據註明出處，遇到發公文或重大決策一定停下來等人確認。這樣用 AI 才能真正替自己分擔重複雜務，把力氣留給教學與學生。", "region": "台中市", "level": "國小"}];
+
+    function renderTable(data) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+      
+      data.forEach((item, idx) => {
+        const tr = document.createElement('tr');
+        tr.className = idx % 2 === 0 ? 'bg-white hover:bg-slate-50' : 'bg-slate-50/50 hover:bg-slate-50';
+        
+        const idBadge = item.is_valid_id 
+          ? `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-800 font-mono">${item.id}</span>`
+          : `<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-500 font-mono">${item.id}</span>`;
+
+        const passBadge = item.is_pass
+          ? `<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-indigo-100 text-indigo-700">${item.fb_len} 字</span>`
+          : `<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-rose-100 text-rose-700">${item.fb_len} 字</span>`;
+
+        const hourIcon = item.is_valid_id
+          ? `<span class="text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> 是</span>`
+          : `<span class="text-slate-400"><i class="fa-solid fa-circle-xmark"></i> 否</span>`;
+
+        tr.innerHTML = `
+          <td class="py-3 px-3 text-center font-medium text-slate-400">${item.idx}</td>
+          <td class="py-3 px-4 font-semibold text-slate-800">
+            ${item.school}
+            <span class="text-[10px] font-normal text-slate-400 block">${item.region} · ${item.level}</span>
+          </td>
+          <td class="py-3 px-3 font-medium text-slate-700 font-mono">${item.name}</td>
+          <td class="py-3 px-3 text-center">${idBadge}</td>
+          <td class="py-3 px-2 text-center">${passBadge}</td>
+          <td class="py-3 px-2 text-center">${hourIcon}</td>
+          <td class="py-3 px-4 text-slate-600 leading-relaxed">${item.feedback}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('recordCountText').textContent = `符合條件紀錄共 ${data.length} 筆`;
+    }
+
+    function filterTable() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filterType = document.getElementById('filterType').value;
+
+      const filtered = records.filter(item => {
+        const matchesQuery = !query || 
+          item.name.toLowerCase().includes(query) || 
+          item.school.toLowerCase().includes(query) || 
+          item.feedback.toLowerCase().includes(query);
+
+        let matchesFilter = true;
+        if (filterType === 'hours') matchesFilter = item.is_valid_id;
+        else if (filterType === 'pass') matchesFilter = item.is_pass;
+        else if (filterType === 'both') matchesFilter = item.is_valid_id && item.is_pass;
+
+        return matchesQuery && matchesFilter;
+      });
+
+      renderTable(filtered);
+    }
+
+    renderTable(records);
+
+    // Charts
+    // 1. Region Chart
+    const regionCtx = document.getElementById('regionChart').getContext('2d');
+    new Chart(regionCtx, {
+      type: 'bar',
+      data: {
+        labels: ['新北', '台中', '台北', '高雄', '桃園', '台南', '基隆', '雲林', '新竹', '苗栗', '宜蘭', '其他縣市'],
+        datasets: [{
+          label: '人數',
+          data: [8, 7, 6, 6, 5, 5, 4, 3, 3, 2, 2, 5],
+          backgroundColor: '#3b82f6',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, ticks: { stepSize: 2 } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // 2. Level Chart
+    const levelCtx = document.getElementById('levelChart').getContext('2d');
+    new Chart(levelCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['國小', '高中職', '國中', '大專院校', '機關/其他'],
+        datasets: [{
+          data: [20, 17, 9, 4, 6],
+          backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#64748b']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
+      }
+    });
+
+    // 3. ID Ratio Chart
+    const idRatioCtx = document.getElementById('idRatioChart').getContext('2d');
+    new Chart(idRatioCtx, {
+      type: 'pie',
+      data: {
+        labels: ['核發時數 (格式正確 39人)', '免時數/非標準格式 (17人)'],
+        datasets: [{
+          data: [39, 17],
+          backgroundColor: ['#059669', '#cbd5e1']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
+      }
+    });
+
+    // 4. Feedback Pass Chart
+    const fbPassCtx = document.getElementById('fbPassChart').getContext('2d');
+    new Chart(fbPassCtx, {
+      type: 'pie',
+      data: {
+        labels: ['回饋合格 >100字 (45人)', '未達100字 (11人)'],
+        datasets: [{
+          data: [45, 11],
+          backgroundColor: ['#4f46e5', '#f43f5e']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }
+      }
+    });
+  </script>
+</body>
+</html>
